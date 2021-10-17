@@ -1,4 +1,4 @@
--- DROP DATABASE Horus;
+DROP DATABASE Horus;
 
 CREATE DATABASE Horus;
 
@@ -120,8 +120,8 @@ insert into MonitoramentoHardware (idOcorrencia,fkMaquina,dataHora,processador,d
 select * from Empresa;
 select * from Funcionario;
 select * from Maquina;
-select * from Acessos;
-select * from Monitoramento;
+select * from MonitoramentoWeb;
+select * from MonitoramentoHardware;
 
 select 
 F.idFuncionario,
@@ -131,7 +131,7 @@ fkMaquina as Maquina,
 url as sitesNavegados,
 dataHora
 from Funcionario F
-inner join MonitoramentoWab W on F.idFuncionario = W.fkFuncionario
+inner join MonitoramentoWeb W on F.idFuncionario = W.fkFuncionario
 ;
 
 
@@ -149,7 +149,7 @@ uptime,
 W.dataHora 
 from Funcionario F
 inner join MonitoramentoWeb W on W.fkFuncionario = F.idFuncionario
-inner join Monitoramento M on W.fkMaquina = M.fkMaquina
+inner join MonitoramentoHardware M on W.fkMaquina = M.fkMaquina
 where nomeFuncionario like '%Raoan%' and W.dataHora like '%2021-10-13%'
 ;
 
