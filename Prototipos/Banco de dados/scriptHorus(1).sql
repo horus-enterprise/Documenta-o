@@ -102,7 +102,8 @@ CREATE TABLE MonitoramentoHardware (
   fkMaquina INT NOT NULL,
   FOREIGN KEY (fkMaquina) REFERENCES Maquina (idMaquina),
   dataHora DATETIME DEFAULT CURRENT_TIMESTAMP,
-  processador FLOAT(3,1),
+  cpuUso FLOAT(3,1),
+  cpuTemperatura FLOAT(3,1),
   disco FLOAT(3,1),
   ram FLOAT(3,1),
   uptime TIME
@@ -110,11 +111,11 @@ CREATE TABLE MonitoramentoHardware (
 
 select * from MonitoramentoHardware;
 
-insert into MonitoramentoHardware (idOcorrencia,fkMaquina,dataHora,processador,disco,ram,uptime) values
-(null,2,default,30.5,40.0,70.0,'02:34:00'),
-(null,3,default,30.5,40.0,70.0,'02:44:00'),
-(null,1,default,30.5,40.0,70.0,'03:34:00'),
-(null,1,default,20.5,50.0,70.0,'03:14:15');
+insert into MonitoramentoHardware (idOcorrencia,fkMaquina,dataHora,cpuUso,cpuTemperatura,disco,ram,uptime) values
+(null,2,default,30.5,40.0,40.0,70.0,'02:34:00'),
+(null,3,default,30.5,40.0,40.0,70.0,'02:44:00'),
+(null,1,default,30.5,40.0,70.0,40.0,'03:34:00'),
+(null,1,default,20.5,50.0,70.0,40.0,'03:14:15');
 
 
 select * from Empresa;
@@ -161,5 +162,7 @@ inner join MonitoramentoWeb W on W.fkMaquina = M.idMAquina
 inner join MonitoramentoHardware M1 on M1.fkMaquina = M.idMAquina
 inner join MonitoramentoWeb W1 on W1.fkFuncionario = F.idFuncionario;
 
-
-
+select senha from Funcionario where email = 'rcamara@horus.com';
+ 
+ 
+ select count(idFuncionario) from Funcionario where senha = '123rcamara' and email = 'rcamara@horus.com';
