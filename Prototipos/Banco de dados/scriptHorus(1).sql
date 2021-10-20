@@ -66,16 +66,18 @@ CREATE TABLE Maquina (
   idMaquina INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   hostname VARCHAR(30) NULL,
   fkEmpresa INT NOT NULL,
+  nomeCpu VARCHAR(100),
+  modeloDisco VARCHAR(100),
   FOREIGN KEY (fkEmpresa) REFERENCES Empresa (idEmpresa)
   );
 
    select * from Maquina;
 
-   insert into Maquina (idMaquina,hostname,fkEmpresa) values
-   (null,'HHJHKHJKH',1),
-   (null,'HHJHKHJKj',1),
-   (null,'HHJHKHJKH',2),
-   (null,'HHJHKHJKj',2);
+   insert into Maquina (idMaquina,hostname,fkEmpresa, nomeCpu, modeloDisco) values
+   (null,'HHJHKHJKH',1,'intel(R) core i5 2400','HD Sansung 1Trb'),
+   (null,'HHJHKHJKj',1,'intel(R) core i5 2400','HD Sansung 1Trb'),
+   (null,'HHJHKHJKH',2,'intel(R) core i5 2400','HD Sansung 1Trb'),
+   (null,'HHJHKHJKj',2,'intel(R) core i5 2400','HD Sansung 1Trb');
 -- -----------------------------------------------------
 -- Table `Acessos`
 -- -----------------------------------------------------  
@@ -106,7 +108,7 @@ CREATE TABLE MonitoramentoHardware (
   cpuTemperatura FLOAT(3,1),
   disco FLOAT(3,1),
   ram FLOAT(3,1),
-  uptime TIME
+  uptime LONG
 );
 
 select * from MonitoramentoHardware;
@@ -143,7 +145,7 @@ idFuncionario,
 nomeFuncionario as Nome,
 W.fkMaquina,
 url as acessos,
-processador,
+cpuUso,
 disco,
 ram,
 uptime,
