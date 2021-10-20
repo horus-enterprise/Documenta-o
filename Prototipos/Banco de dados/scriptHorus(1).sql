@@ -73,11 +73,11 @@ CREATE TABLE Maquina (
 
    select * from Maquina;
 
-   insert into Maquina (idMaquina,hostname,fkEmpresa, nomeCpu, modeloDisco) values
-   (null,'HHJHKHJKH',1,'intel(R) core i5 2400','HD Sansung 1Trb'),
-   (null,'HHJHKHJKj',1,'intel(R) core i5 2400','HD Sansung 1Trb'),
-   (null,'HHJHKHJKH',2,'intel(R) core i5 2400','HD Sansung 1Trb'),
-   (null,'HHJHKHJKj',2,'intel(R) core i5 2400','HD Sansung 1Trb');
+   insert into Maquina (idMaquina,hostname,fkEmpresa,nomeCpu,modeloDisco) values
+   (null,'HHJHKHJKH',1,'Intel core i5 2400','Sansung HD 500Gb'),
+   (null,'HHJHKHJKj',1,'Intel core i5 2400','Sansung HD 500Gb'),
+   (null,'HHJHKHJKH',2,'Intel core i5 2400','Sansung HD 500Gb'),
+   (null,'HHJHKHJKj',2,'Intel core i5 2400','Sansung HD 500Gb');
 -- -----------------------------------------------------
 -- Table `Acessos`
 -- -----------------------------------------------------  
@@ -113,11 +113,8 @@ CREATE TABLE MonitoramentoHardware (
 
 select * from MonitoramentoHardware;
 
-insert into MonitoramentoHardware (idOcorrencia,fkMaquina,dataHora,cpuUso,cpuTemperatura,disco,ram,uptime) values
-(null,2,default,30.5,40.0,40.0,70.0,'02:34:00'),
-(null,3,default,30.5,40.0,40.0,70.0,'02:44:00'),
-(null,1,default,30.5,40.0,70.0,40.0,'03:34:00'),
-(null,1,default,20.5,50.0,70.0,40.0,'03:14:15');
+insert into MonitoramentoHardware (fkMaquina,cpuUso,cpuTemperatura,disco,ram,uptime) values
+(2,30.5,40.0,40.0,70.0,'52100');
 
 
 select * from Empresa;
@@ -146,6 +143,7 @@ nomeFuncionario as Nome,
 W.fkMaquina,
 url as acessos,
 cpuUso,
+cpuTemperatura,
 disco,
 ram,
 uptime,
