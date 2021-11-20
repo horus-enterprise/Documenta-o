@@ -54,7 +54,7 @@ CREATE TABLE Funcionario (
   FOREIGN KEY (fkSupervisor) REFERENCES Funcionario (idFuncionario)
   );
   
-  select * from Funcionario;
+  -- select * from Funcionario;
   
   insert into Funcionario (idFuncionario,nomeFuncionario,email,senha,fkEmpresa,fkSupervisor) values
   (null,'Raoan Camara','rcamara@horus.com','123rcamara',1,null),
@@ -68,16 +68,15 @@ CREATE TABLE Maquina (
   fkEmpresa INT NOT NULL,
   nomeCpu VARCHAR(100),
   modeloDisco VARCHAR(100),
+  tamanhoDisco FLOAT,
+  tamanhoRam FLOAT,
   FOREIGN KEY (fkEmpresa) REFERENCES Empresa (idEmpresa)
   );
 
-   select * from Maquina;
+-- select * from Maquina;
 
-   insert into Maquina (idMaquina,hostname,fkEmpresa,nomeCpu,modeloDisco) values
-   (null,'HHJHKHJKH',1,'Intel core i5 2400','Sansung HD 500Gb'),
-   (null,'HHJHKHJKj',1,'Intel core i5 2400','Sansung HD 500Gb'),
-   (null,'HHJHKHJKH',2,'Intel core i5 2400','Sansung HD 500Gb'),
-   (null,'HHJHKHJKj',2,'Intel core i5 2400','Sansung HD 500Gb');
+   insert into Maquina (idMaquina,hostname,fkEmpresa,nomeCpu,modeloDisco,tamanhoDisco,tamanhoRam) values
+   (null,'HHJHKHJKH',1,'Intel core i5 2400','Sansung HD 500Gb',100.0,8.0);
 -- -----------------------------------------------------
 -- Table `Acessos`
 -- -----------------------------------------------------  
@@ -91,10 +90,10 @@ url VARCHAR (200),
 dataHora DATETIME DEFAULT CURRENT_TIMESTAMP 
 );
 
-select * from MonitoramentoWeb;
+-- select * from MonitoramentoWeb;
 
 insert into MonitoramentoWeb (fkFuncionario, fkMaquina, url,dataHora) values
-(1,2,'www.bandtec.com',default),
+(1,1,'www.bandtec.com',default),
 (2,1,'www.bandtec.com',default);
 -- -----------------------------------------------------
 -- Table `mydb`.`Monitoramento`
@@ -104,65 +103,65 @@ CREATE TABLE MonitoramentoHardware (
   fkMaquina INT NOT NULL,
   FOREIGN KEY (fkMaquina) REFERENCES Maquina (idMaquina),
   dataHora DATETIME DEFAULT CURRENT_TIMESTAMP,
-  cpuUso FLOAT(3,1),
-  cpuTemperatura FLOAT(3,1),
-  disco FLOAT(3,1),
-  ram FLOAT(3,1),
+  cpuUso FLOAT,
+  cpuTemperatura FLOAT,
+  disco FLOAT,
+  ram FLOAT,
   uptime LONG
 );
 
-select * from MonitoramentoHardware;
+-- select * from MonitoramentoHardware;
 
 insert into MonitoramentoHardware (fkMaquina,cpuUso,cpuTemperatura,disco,ram,uptime) values
-(2,30.5,40.0,40.0,70.0,'52100');
+(1,30.5,40.0,40.0,70.0,'52100');
 
 
-select * from Empresa;
-select * from Funcionario;
-select * from Maquina;
-select * from MonitoramentoWeb;
+-- select * from Empresa;
+-- select * from Funcionario;
+-- select * from Maquina;
+-- select * from MonitoramentoWeb;
 select * from MonitoramentoHardware;
 
-select 
-F.idFuncionario,
-nomeFuncionario as Nome,
-fkEmpresa as Empresa,
-fkMaquina as Maquina, 
-url as sitesNavegados,
-dataHora
-from Funcionario F
-inner join MonitoramentoWeb W on F.idFuncionario = W.fkFuncionario
-;
+-- select 
+-- F.idFuncionario,
+-- nomeFuncionario as Nome,
+-- fkEmpresa as Empresa,
+-- fkMaquina as Maquina, 
+-- url as sitesNavegados,
+-- dataHora
+-- from Funcionario F
+-- inner join MonitoramentoWeb W on F.idFuncionario = W.fkFuncionario
+-- ;
 
 
 
 
-select 
-idFuncionario,
-nomeFuncionario as Nome,
-W.fkMaquina,
-url as acessos,
-cpuUso,
-cpuTemperatura,
-disco,
-ram,
-uptime,
-W.dataHora 
-from Funcionario F
-inner join MonitoramentoWeb W on W.fkFuncionario = F.idFuncionario
-inner join MonitoramentoHardware M on W.fkMaquina = M.fkMaquina
-where nomeFuncionario like '%Raoan%' and W.dataHora like '%2021-10-13%'
-;
+-- select 
+-- idFuncionario,
+-- nomeFuncionario as Nome,
+-- W.fkMaquina,
+-- url as acessos,
+-- cpuUso,
+-- cpuTemperatura,
+-- disco,
+-- ram,
+-- uptime,
+-- W.dataHora 
+-- from Funcionario F
+-- inner join MonitoramentoWeb W on W.fkFuncionario = F.idFuncionario
+-- inner join MonitoramentoHardware M on W.fkMaquina = M.fkMaquina
+-- where nomeFuncionario like '%Raoan%' and W.dataHora like '%2021-10-13%'
+-- ;
 
-select * from Empresa E
-inner join Funcionario F on E.idEmpresa = F.fkEmpresa
-inner join Telefone T on T.fkEmpresa = E.idEmpresa
-inner join Maquina M on E.idEmpresa = M.fkEmpresa
-inner join MonitoramentoWeb W on W.fkMaquina = M.idMAquina
-inner join MonitoramentoHardware M1 on M1.fkMaquina = M.idMAquina
-inner join MonitoramentoWeb W1 on W1.fkFuncionario = F.idFuncionario;
+-- select * from Empresa E
+-- inner join Funcionario F on E.idEmpresa = F.fkEmpresa
+-- inner join Telefone T on T.fkEmpresa = E.idEmpresa
+-- inner join Maquina M on E.idEmpresa = M.fkEmpresa
+-- inner join MonitoramentoWeb W on W.fkMaquina = M.idMAquina
+-- inner join MonitoramentoHardware M1 on M1.fkMaquina = M.idMAquina
+-- inner join MonitoramentoWeb W1 on W1.fkFuncionario = F.idFuncionario;
 
-select senha from Funcionario where email = 'rcamara@horus.com';
+-- select senha from Funcionario where email = 'rcamara@horus.com';
  
  
- select count(idFuncionario) from Funcionario where senha = '123rcamara' and email = 'rcamara@horus.com';
+ -- select count(idFuncionario) from Funcionario where senha = '123rcamara' and email = 'rcamara@horus.com';
