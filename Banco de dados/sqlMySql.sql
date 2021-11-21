@@ -9,6 +9,7 @@ USE  Horus;
 -- -----------------------------------------------------
 CREATE TABLE Empresa (
   idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+  codigo VARCHAR(40),
   cnpj CHAR(14) NULL,
   razaoSocial VARCHAR(255),
   email VARCHAR(255),
@@ -21,9 +22,9 @@ CREATE TABLE Empresa (
   complemento VARCHAR(100)
   );
   
-  insert into Empresa (idEmpresa,cnpj,razaoSocial,email,cep,uf,cidade,bairro,lougadouro,numero,complemento) values
-  (null,'XXXXXXXX0001XX','Vikstar contact center','vikistar@yahoo.com','08581-220','SP','Itaquera','Sesc','rua feia',123,'predio'),
-  (null,'XXXXXXXX0002XX','Call contact center','Call@yahoo.com','08581-220','SP','Capão','jd. Capão','rua feia',123,'predio');
+  -- insert into Empresa (idEmpresa,cnpj,razaoSocial,email,cep,uf,cidade,bairro,lougadouro,numero,complemento) values
+  -- (null,'XXXXXXXX0001XX','Vikstar contact center','vikistar@yahoo.com','08581-220','SP','Itaquera','Sesc','rua feia',123,'predio'),
+  -- (null,'XXXXXXXX0002XX','Call contact center','Call@yahoo.com','08581-220','SP','Capão','jd. Capão','rua feia',123,'predio');
   
   -- -----------------------------------------------------
 -- Table `mydb`.`Telefone`
@@ -36,9 +37,9 @@ CREATE TABLE Telefone (
   FOREIGN KEY (fkEmpresa) REFERENCES Empresa (idEmpresa)
   );
   
-  insert into Telefone (idtelefone,telefone,tipo,fkempresa) values
-  (null,'11944444444','whatzapp',1),
-  (null,'11944444444','whatzapp',1);
+  -- insert into Telefone (idtelefone,telefone,tipo,fkempresa) values
+  -- (null,'11944444444','whatzapp',1),
+  -- (null,'11944444444','whatzapp',1);
 
 -- -----------------------------------------------------
 -- Table `Funcionario`
@@ -56,9 +57,9 @@ CREATE TABLE Funcionario (
   
   -- select * from Funcionario;
   
-  insert into Funcionario (idFuncionario,nomeFuncionario,email,senha,fkEmpresa,fkSupervisor) values
-  (null,'Raoan Camara','rcamara@horus.com','123rcamara',1,null),
-  (null,'Vinicius Algusto','valgusto@horus.com','123algusto',1,1);
+  -- insert into Funcionario (idFuncionario,nomeFuncionario,email,senha,fkEmpresa,fkSupervisor) values
+  -- (null,'Raoan Camara','rcamara@horus.com','123rcamara',1,null),
+  -- (null,'Vinicius Algusto','valgusto@horus.com','123algusto',1,1);
 -- -----------------------------------------------------
 -- Table `Maquina`
 -- -----------------------------------------------------
@@ -73,10 +74,9 @@ CREATE TABLE Maquina (
   FOREIGN KEY (fkEmpresa) REFERENCES Empresa (idEmpresa)
   );
 
--- select * from Maquina;
 
-   insert into Maquina (idMaquina,hostname,fkEmpresa,nomeCpu,modeloDisco,tamanhoDisco,tamanhoRam) values
-   (null,'HHJHKHJKH',1,'Intel core i5 2400','Sansung HD 500Gb',100.0,8.0);
+   -- insert into Maquina (idMaquina,hostname,fkEmpresa,nomeCpu,modeloDisco,tamanhoDisco,tamanhoRam) values
+   -- (null,'HHJHKHJKH',1,'Intel core i5 2400','Sansung HD 500Gb',100.0,8.0);
 -- -----------------------------------------------------
 -- Table `Acessos`
 -- -----------------------------------------------------  
@@ -92,9 +92,9 @@ dataHora DATETIME DEFAULT CURRENT_TIMESTAMP
 
 -- select * from MonitoramentoWeb;
 
-insert into MonitoramentoWeb (fkFuncionario, fkMaquina, url,dataHora) values
-(1,1,'www.bandtec.com',default),
-(2,1,'www.bandtec.com',default);
+-- insert into MonitoramentoWeb (fkFuncionario, fkMaquina, url,dataHora) values
+-- (1,1,'www.bandtec.com',default),
+-- (2,1,'www.bandtec.com',default);
 -- -----------------------------------------------------
 -- Table `mydb`.`Monitoramento`
 -- -----------------------------------------------------
@@ -110,17 +110,28 @@ CREATE TABLE MonitoramentoHardware (
   uptime LONG
 );
 
+CREATE TABLE Monitoramento (
+idMonitoramento INT PRIMARY KEY AUTO_INCREMENT,
+fkEmpresa INT NOT NULL,
+FOREIGN KEY (fkEmpresa) REFERENCES Empresa (idEmpresa),
+fkMaquina INT NOT NULL,
+FOREIGN KEY (fkMaquina) REFERENCES Maquina (idMaquina),
+cpuAtivo BOOLEAN,
+discAtivo BOOLEAN,
+ramAtivo BOOLEAN
+);
+
 -- select * from MonitoramentoHardware;
 
-insert into MonitoramentoHardware (fkMaquina,cpuUso,cpuTemperatura,disco,ram,uptime) values
-(1,30.5,40.0,40.0,70.0,'52100');
+-- insert into MonitoramentoHardware (fkMaquina,cpuUso,cpuTemperatura,disco,ram,uptime) values
+-- (1,30.5,40.0,40.0,70.0,'52100');
 
 
 -- select * from Empresa;
 -- select * from Funcionario;
 -- select * from Maquina;
 -- select * from MonitoramentoWeb;
-select * from MonitoramentoHardware;
+-- select * from MonitoramentoHardware;
 
 -- select 
 -- F.idFuncionario,
