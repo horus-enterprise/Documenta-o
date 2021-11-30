@@ -19,13 +19,12 @@ CREATE TABLE Empresa (
   );
 
 
-CREATE TABLE Telefone (
-  idtelefone INT NOT NULL PRIMARY KEY IDENTITY,
-  telefone VARCHAR(13) NULL,
-  tipo VARCHAR(50),
+CREATE TABLE Slack (
+  idSlack  INT PRIMARY KEY IDENTITY,
+  urlSlack VARCHAR(250),
   fkEmpresa INT NOT NULL,
   FOREIGN KEY (fkEmpresa) REFERENCES Empresa (idEmpresa)
-  );
+);
   
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
 CREATE TABLE Funcionario (
