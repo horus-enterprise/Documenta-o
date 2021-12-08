@@ -21,7 +21,7 @@ if [ $? -eq 0 ]
 		sudo java -jar horus-cli/target/horus-cli-jar-with-dependencies.jar
 	else
 		echo "$(tput setaf 10)[HORUS INSTALLER]:$(tput setaf 7) Você não possui o Java instalado!"
-		echo "$(tput setaf 10)[HORUS INSTALLER]:$(tput setaf 7)  Deseja instalar o Java (S/N)?"
+		echo "$(tput setaf 10)[HORUS INSTALLER]:$(tput setaf 7)  Deseja instalar o Java (s/n)?"
 	read inst
 	if [ \"$inst\" == \"s\" ]
 		then
