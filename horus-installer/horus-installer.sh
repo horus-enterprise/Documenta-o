@@ -37,9 +37,9 @@ if [ $? -eq 0 ]
 			if [ $VERSAO -eq 11 ]
 				then
 					echo "$(tput setaf 10)[HORUS INSTALLER]:$(tput setaf 7) Preparando para instalar a versão 11 do Java. Confirme a instalação quando solicitado ;D"
-					sudo apt install default-jre ; apt install openjdk-11-jre-headless; -y
+					sudo apt install default-jre -y; apt install openjdk-11-jre-headless -y;
 					clear
-					echo "$(tput setaf 10)[HORUS INSTALLER]:$(tput setaf 7) Java instalado com sucesso!"
+					echo "$(tput setaf 10)[HORUS INSTALLER]:$(tput setaf 7) Java (JRE 11) instalado com sucesso!"
 					echo "$(tput setaf 10)[HORUS INSTALLER]:$(tput setaf 7) Baixando aplicação do GitHub..."
 					sleep 5
 					git clone https://github.com/horus-enterprise/horus-cli
